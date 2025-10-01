@@ -1,22 +1,3 @@
 # DTSC 3601 - OpenAI Coding Assignment 4
 
-This repo contains the full pipeline for the assignment:
-
-- **ai_portion.py** → Collects data (URL/PDF), calls LLM, outputs structured JSON/CSV  
-- **Supabase_loader.py** → Loads structured data into Supabase  
-- **streamlit_app.py** → Streamlit dashboard for visualization (charts, tables)  
-- **modal_app.py** → Deployment wrapper for Streamlit (for Modal)  
-- **proxy_smoke.py** → Utility for proxy testing
-
-## Running Locally
-```bash
-python ai_portion.py --pdf "List of countries by GDP (nominal) - Wikipedia.pdf" --topic gdp
-python Supabase_loader.py
-streamlit run streamlit_app.py
-```
-
-## Notes
-- Supabase and API keys should be provided via environment variables (`.env`) and **not hard-coded**.
-- Modal deployment may fail if free quota is exceeded; Streamlit Cloud is an alternative.
-
-
+For this project I built a pipeline that takes in data, cleans it up with an LLM, saves it to Supabase, and then shows it in Streamlit. I first tried using sports data from the Detroit Lions page, but the data there wasn’t in HTML so the scraper failed. I then tried Pro-Football-Reference since it’s plain HTML, but that site blocked the request with 403 errors. I also tried Wikipedia directly but hit the same problem, so I switched to downloading the page as a PDF and scraping it from there instead. The LLM was helpful because it took the messy text from the PDF and turned it into a clean JSON object with a title, summary, keywords, and timestamps, which saved me from writing a ton of custom parsing code. After that I pushed the JSON into Supabase and connected it to a Streamlit app where I could make tables and charts, like a GDP pie chart grouped by continent. Along the way there were some issues with Supabase not liking arrays, fixing the loader to parse keywords correctly, and also hitting the Modal free limit when deploying. Even with those problems, I got the system working and showing how an LLM can clean raw text into usable data.
