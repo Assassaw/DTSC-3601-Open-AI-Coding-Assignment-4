@@ -1,7 +1,7 @@
 # proxy_smoke.py
 from openai import OpenAI
 
-BASE_URL = "https://cdong1--azure-proxy-web-app.modal.run"  # no trailing slash works
+BASE_URL = "https://cdong1--azure-proxy-web-app.modal.run" 
 API_KEY  = "supersecretkey"
 MODEL    = "gpt-4o"
 
