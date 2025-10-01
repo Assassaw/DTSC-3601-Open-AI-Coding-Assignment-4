@@ -1,0 +1,9 @@
+openai
+supabase
+streamlit
+plotly
+pandas
+pdfplumber
+beautifulsoup4
+requests
+lxml
